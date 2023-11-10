@@ -1,15 +1,19 @@
 services:
-  - type: mongo
-    name: mongo
-    env:
-      - key: MONGO_INITDB_ROOT_USERNAME
-        fromDatabase: mongodb
-        fromKey: username
-      - key: MONGO_INITDB_ROOT_PASSWORD
-        fromDatabase: mongodb
-        fromKey: password
-    plan: small
+  - type: web
+    name: mongodb
     buildCommand: docker build -t mongodb-image .
     startCommand: docker run -p 27017:27017 --name mongodb-container mongodb-image
+    env:
+      - key: MONGO_INITDB_ROOT_USERNAME
+        value: your_mongodb_username
+      - key: MONGO_INITDB_ROOT_PASSWORD
+        value: your_mongodb_password
     healthCheckPath: /
     healthCheckPort: 27017
+
+  - type: redis
+    name: redis
+    buildCommand: docker build -t redis-image .
+    startCommand: docker run -p 6379:6379 --name redis-container redis-image
+    healthCheckPath: /
+    healthCheckPort: 6379
