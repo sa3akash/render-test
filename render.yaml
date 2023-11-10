@@ -1,5 +1,5 @@
 services:
-  - type: docker
+  - type: databases
     name: mongodb
     env:
       - key: MONGO_INITDB_ROOT_USERNAME
