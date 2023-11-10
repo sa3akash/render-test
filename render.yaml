@@ -2,14 +2,4 @@ services:
   - type: web
     name: mongodb
     buildCommand: docker build -t mongodb-image .
-    startCommand: docker run -p 27017:27017 --name mongodb-container mongodb-image
-    env:
-      - key: MONGO_INITDB_ROOT_USERNAME
-        value: your_mongodb_username
-      - key: MONGO_INITDB_ROOT_PASSWORD
-        value: your_mongodb_password
-
-  - type: web
-    name: redis
-    buildCommand: docker build -t redis-image .
-    startCommand: docker run -p 6379:6379 --name redis-container redis-image
+    startCommand: docker run -p 27017:27017 --name mongodb-container -e MONGODB_ROOT_USERNAME=your_mongodb_username -e MONGODB_ROOT_PASSWORD=your_mongodb_password mongodb-image
