@@ -1,5 +1,5 @@
 services:
-  - type: database
+  - type: mongo
     name: mongo
     env:
       - key: MONGO_INITDB_ROOT_USERNAME
