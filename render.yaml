@@ -1,8 +1,15 @@
 services:
-  - type: mongodb
+  - type: docker
     name: mongodb
-    plan: mongodb-small
-
-  - type: redis
-    name: redis
-    plan: redis-small
+    env:
+      - key: MONGO_INITDB_ROOT_USERNAME
+        fromDatabase: mongodb
+        fromKey: username
+      - key: MONGO_INITDB_ROOT_PASSWORD
+        fromDatabase: mongodb
+        fromKey: password
+    plan: small
+    buildCommand: docker build -t mongodb-image .
+    startCommand: docker run -p 27017:27017 --name mongodb-container mongodb-image
+    healthCheckPath: /
+    healthCheckPort: 27017
