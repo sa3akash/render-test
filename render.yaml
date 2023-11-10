@@ -8,12 +8,8 @@ services:
         value: your_mongodb_username
       - key: MONGO_INITDB_ROOT_PASSWORD
         value: your_mongodb_password
-    healthCheckPath: /
-    healthCheckPort: 27017
 
-  - type: redis
+  - type: web
     name: redis
     buildCommand: docker build -t redis-image .
     startCommand: docker run -p 6379:6379 --name redis-container redis-image
-    healthCheckPath: /
-    healthCheckPort: 6379
