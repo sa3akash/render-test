@@ -1,5 +1,6 @@
 services:
-  - name: redis-stack
+  - type: web
+    name: redis-stack
     image: redis/redis-stack
     env: 
       - key: REDIS_ARGS
@@ -11,7 +12,8 @@ services:
       - name: redis-data
         mountPath: /data
 
-  - name: mongodb
+  - type: web
+    name: mongodb
     image: mongo
     env: 
       - key: MONGO_INITDB_ROOT_USERNAME
@@ -24,7 +26,8 @@ services:
       - name: mongodata
         mountPath: /data/db
 
-  - name: mongo-express
+  - type: web
+    name: mongo-express
     image: mongo-express
     env: 
       - key: ME_CONFIG_MONGODB_SERVER
