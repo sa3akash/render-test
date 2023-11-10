@@ -1,0 +1,44 @@
+services:
+  - name: redis-stack
+    image: redis/redis-stack
+    env: 
+      - key: REDIS_ARGS
+        value: --appendonly yes
+    ports:
+      - 6379:6379
+      - 8001:8001
+    volumes:
+      - name: redis-data
+        mountPath: /data
+
+  - name: mongodb
+    image: mongo
+    env: 
+      - key: MONGO_INITDB_ROOT_USERNAME
+        value: root
+      - key: MONGO_INITDB_ROOT_PASSWORD
+        value: pass12345
+    ports:
+      - 27017:27017
+    volumes:
+      - name: mongodata
+        mountPath: /data/db
+
+  - name: mongo-express
+    image: mongo-express
+    env: 
+      - key: ME_CONFIG_MONGODB_SERVER
+        value: mongodb
+      - key: ME_CONFIG_BASICAUTH_USERNAME
+        value: root
+      - key: ME_CONFIG_BASICAUTH_PASSWORD
+        value: root
+    ports:
+      - 8002:8081
+    volumes:
+      - name: mongodata
+        mountPath: /data/db
+
+volumes:
+  - name: mongodata
+  - name: redis-data
