@@ -1,6 +1,6 @@
 services:
-  - type: databases
-    name: mongodb
+  - type: database
+    name: mongo
     env:
       - key: MONGO_INITDB_ROOT_USERNAME
         fromDatabase: mongodb
